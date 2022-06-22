@@ -2,6 +2,7 @@ import React from 'react';
 import styled from "styled-components";
 import Sidebar from "./Sidebar";
 import useClickOutside from "../hooks/useClickOutside";
+import { useNavigate } from "react-router-dom";
 
 const StyledWrapper = styled.div`
   position: fixed;
@@ -11,12 +12,13 @@ const StyledWrapper = styled.div`
   height: 80px;
   border-bottom: 1px solid black;
   display: flex;
-  align-items: center;  
+  align-items: center;
   justify-content: space-between;
-  padding: 0 40px;
+  //padding: 0 40px;
   @media (max-width: 800px) {
     padding: 0 20px;
   }
+
   p {
     margin: 0 10px;
   }
@@ -41,23 +43,37 @@ const MenuButton = styled.div`
   }
 `;
 
-const Navbar = ({setOpen,isOpen}) => {
-    const handleClick = () => setOpen(!isOpen);
-    const { ref } = useClickOutside(() => setOpen(false));
+const Navbar = ({ setOpen, isOpen }) => {
+
+    // const handleClick = () => setOpen(!isOpen);
+    // const { ref } = useClickOutside(() => setOpen(false));
+    const navigate = useNavigate();
+
     return (
         <StyledWrapper>
-            <p>lMenuButtonogout</p>
-            <StyledRight>
-                <p>test</p>
-                <p>test</p>
-                <p>test</p>
-                <p>test</p>
-                <p>test</p>
-            </StyledRight>
-            <div ref={ref}>
-                <MenuButton onClick={handleClick}/>
-                <Sidebar isOpen={isOpen} setOpen={setOpen}/>
+            <div>
+                <span onClick={() => {
+                    navigate('/')
+                }}>Home</span>
+                <span onClick={() => {
+                    navigate('/cart')
+                }}>Cart</span>
             </div>
+
+            <p onClick={() => {
+                navigate('/login')
+            }}>Login</p>
+            {/*<StyledRight>*/}
+            {/*    <p>test</p>*/}
+            {/*    <p>test</p>*/}
+            {/*    <p>test</p>*/}
+            {/*    <p>test</p>*/}
+            {/*    <p>test</p>*/}
+            {/*</StyledRight>*/}
+            {/*<div ref={ref}>*/}
+            {/*    <MenuButton onClick={handleClick}/>*/}
+            {/*    <Sidebar isOpen={isOpen} setOpen={setOpen}/>*/}
+            {/*</div>*/}
         </StyledWrapper>
     );
 };

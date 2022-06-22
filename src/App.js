@@ -1,6 +1,7 @@
-import React from "react";
+import React from 'react';
 import './App.css';
-import HomePage from "./containers/HomePage";
+import AppContainer from "./containers/AppContainer";
+import Router from './routes/Router';
 import storeCreator from './redux/store';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/lib/integration/react';
@@ -12,7 +13,9 @@ function App() {
     return (
         <Provider store={store}>
             <PersistGate persistor={persistor}>
-                <HomePage/>
+                <AppContainer>
+                    <Router/>
+                </AppContainer>
             </PersistGate>
         </Provider>
     );
