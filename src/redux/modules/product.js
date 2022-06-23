@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit';
 import { put } from 'redux-saga/effects';
 
 const initialState = {
@@ -8,7 +8,7 @@ const initialState = {
     error: null
 };
 
-export const userSlice = createSlice({
+export const productSlice = createSlice({
     name: 'product',
     initialState,
     reducers: {
@@ -25,10 +25,10 @@ export const userSlice = createSlice({
             loaded: true,
             error: action.payload
         }),
-    },
+    }
 });
 
-const { loadProduct, loadProductSuccess, loadProductFailure } = userSlice.actions;
+const { loadProduct, loadProductSuccess, loadProductFailure } = productSlice.actions;
 
 export function* watchProduct() {
     try {
@@ -46,4 +46,4 @@ export function* watchProduct() {
 }
 
 export { loadProduct };
-export default userSlice.reducer;
+export default productSlice.reducer;

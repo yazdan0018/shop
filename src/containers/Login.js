@@ -21,8 +21,6 @@ const Login = () => {
         const [displayLoading, setDisplayLoading] = useState(false);
         const [loginStatus, setLoginStatus] = useState(false);
 
-        console.log(token)
-
         // useEffect(() => {
         //     if (token) {
         //         return history({ pathname: '/profile' });

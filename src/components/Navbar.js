@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from "styled-components";
 import Sidebar from "./Sidebar";
 import useClickOutside from "../hooks/useClickOutside";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { tokenRemove } from "../redux/modules/token";
 
 const StyledWrapper = styled.div`
   position: fixed;
@@ -48,21 +50,27 @@ const Navbar = ({ setOpen, isOpen }) => {
     // const handleClick = () => setOpen(!isOpen);
     // const { ref } = useClickOutside(() => setOpen(false));
     const navigate = useNavigate();
+    const token = useSelector(state => state.token.token);
+    const dispatch = useDispatch();
+
 
     return (
         <StyledWrapper>
-            <div>
+            <>
                 <span onClick={() => {
                     navigate('/')
                 }}>Home</span>
                 <span onClick={() => {
                     navigate('/cart')
                 }}>Cart</span>
-            </div>
+            </>
 
             <p onClick={() => {
                 navigate('/login')
-            }}>Login</p>
+            }}>{token ? '' : 'Log In'}</p>
+            {token ? <p onClick={() => {
+                dispatch(tokenRemove())
+            }}>Logout</p> : ''}
             {/*<StyledRight>*/}
             {/*    <p>test</p>*/}
             {/*    <p>test</p>*/}

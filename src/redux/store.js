@@ -4,11 +4,12 @@ import storage from 'redux-persist/lib/storage';
 import createSagaMiddleware from 'redux-saga';
 import sagas from './sagas';
 import rootReducer from './rootReducer';
-
+import { token } from "./modules/token";
+import { cart } from './modules/cart';
 const persistConfig = {
     key: 'root',
     storage,
-    whitelist : []
+    whitelist : 'token,cart'
 };
 
 let persistedReducer = persistReducer(persistConfig, rootReducer);

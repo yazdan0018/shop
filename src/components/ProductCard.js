@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { loadProduct } from "../redux/modules/product";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import { addToCart, loadCart } from "../redux/modules/cart";
 
 const ProductWrapper = styled.div`
   display: flex;
@@ -48,11 +49,17 @@ const ProductCard = () => {
         error: productError
     } = useSelector(store => store.product);
 
+
+
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(loadProduct());
     }, [dispatch]);
+
+    // useEffect(()=>{
+    //     dispatch(loadCart)
+    // },[dispatch])
 
     return (
         <ProductWrapper>
@@ -62,7 +69,10 @@ const ProductCard = () => {
                             <img src={data.image} alt={data.id}/>
                             <p>{data.title}</p>
                             <p>{data.price}$</p>
-                            <button>Add to cart</button>
+                            <button onClick={()=>{
+                                dispatch(addToCart(data));
+                                alert(`${data.title} added`);
+                            }}>Add to cart</button>
                         </ProductCardWrapper>
                     )
                 })
